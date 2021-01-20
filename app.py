@@ -35,7 +35,8 @@ rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
 
 rndm.fit(X_train, y_train)
 rndm_y_pred = rndm.predict(X)
-
+firstY=df['a/a_smooth_Bor']
+firstY=firstY.values
 endYYY=rndm_y_pred/firstY
 
 endYYY=pd.DataFrame(data=endYYY)

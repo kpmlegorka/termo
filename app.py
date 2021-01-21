@@ -19,7 +19,7 @@ y = df['a/a_smooth_Bor']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
 @st.cache
-def rndFors()
+def rndFors():
     rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
 
     rndm.fit(X_train, y_train)

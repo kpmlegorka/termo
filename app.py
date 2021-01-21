@@ -18,18 +18,21 @@ X = df[['Kq','angle/90', 'h/lo', 'D/lo', 'd/lo', 'u/lo', 's/lo', 'Pr']]
 y = df['a/a_smooth_Bor']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
-rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
+@st.cache
+def rndFors()
+    rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
 
-rndm.fit(X_train, y_train)
-rndm_y_pred = rndm.predict(X)
-firstY=df['a/a_smooth_Bor']
-firstY=firstY.values
-endYYY=rndm_y_pred/firstY
-endYYY=pd.DataFrame(data=endYYY)
-endYYY=endYYY.loc[:,0]
+    rndm.fit(X_train, y_train)
+    rndm_y_pred = rndm.predict(X)
+    firstY=df['a/a_smooth_Bor']
+    firstY=firstY.values
+    endYYY=rndm_y_pred/firstY
+    endYYY=pd.DataFrame(data=endYYY)
+    endYYY=endYYY.loc[:,0]
+    return endYYY
 
-
-plt.scatter(df['q'], endYYY, edgecolor='b')
+YYY=rndFors()
+plt.scatter(df['q'], YYY, edgecolor='b')
 plt.ylim([0.1, 10])
 plt.xlim([1000, 10000000])
 plt.yscale('log')

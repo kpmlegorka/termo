@@ -31,7 +31,7 @@ def RndForst():
          endYYY=pd.DataFrame(data=endYYY)
          endYYY=endYYY.loc[:,0]
          return endYYY
-RndForst()
+endYYY=RndForst()
 
 plt.scatter(df['q'], endYYY, edgecolor='b')
 plt.ylim([0.1, 10])

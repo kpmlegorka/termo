@@ -20,7 +20,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 y_forest=0.123456
 
 rndFors=st.checkbox("show forest", False)
-@st.cache
+
 if rndFors:
     rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
     rndm.fit(X_train, y_train)

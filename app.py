@@ -17,7 +17,7 @@ df=read_data()
 X = df[['Kq','angle/90', 'h/lo', 'D/lo', 'd/lo', 'u/lo', 's/lo']]
 y = df['a/a_smooth_Bor']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-y_forest=0.123456
+y_forest=np.array([' '])
 
 rndFors=st.checkbox("use forest", False)
 

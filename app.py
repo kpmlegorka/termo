@@ -18,6 +18,8 @@ X = df[['Kq','angle/90', 'h/lo', 'D/lo', 'd/lo', 'u/lo', 's/lo', 'Pr']]
 y = df['a/a_smooth_Bor']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 y_forest=0.123456
+
+st.checkbox("show forest", False)
 @st.cache
 if rndFors:
     rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
@@ -68,7 +70,7 @@ if genre == '3D':
         st.header("Значение теплоотдачи")  
         st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','D/lo=', x4,'; ','d/lo=', x5,'; ','u/lo=', x6,'; ','s/lo=', x7)
         st.write('Формула: α/α0=',y)
-        st.checkbox("show forest", False)
+        
         st.write('Лес: α/α0=',y_forest)
 else:
 #Kq

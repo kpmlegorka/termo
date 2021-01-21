@@ -62,7 +62,7 @@ if genre == '3D':
         st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','D/lo=', x4,'; ','d/lo=', x5,'; ','u/lo=', x6,'; ','s/lo=', x7)
         st.write('Формула: α/α0=',y)
         
-        st.write('Лес: α/α0=',y_forest)
+        st.write('Лес: α/α0=',y_forest.values)
 else:
 #Kq
     x1 = st.sidebar.slider('Kq', min_value=2, max_value=12000)

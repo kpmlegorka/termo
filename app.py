@@ -8,39 +8,30 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
 from sklearn.preprocessing import PolynomialFeatures
 
-df=pd.read_csv('datatermo.csv')
-df.drop(['М','Unnamed: 42', 'ro пара', 'ню жидк', 'r','g','ro жидк','сигма','алфа Кутател','алфа  Лабунцов', 'алфа Боришан',
-         'ср ж', 'лямбда ж', 'cp пара', 'лямбда п', 'ню пара', 'а ж',], axis='columns', inplace=True)
-df.set_axis(['q', 'alfa', 'sample', 'Kq', 'lo', 'height_h', 'gap_D', 'gap_u', 
-             'thickness_d','thickness_s', 'angle', 'angle/90', 'h/lo', 'D/lo', 'd/lo', 
-             'u/lo', 's/lo','liquid', 'a/a_smooth_Kut', 'Pr','P', 'Ts', 'a/a_smooth_Lab', 
-             'T_krit', 'P_krit', 'a/a_smooth_Bor'], axis='columns', inplace=True)
-#удаляем строку с большим q 
-df = df.loc[df['q'] < 2500000]
-df = df.reset_index(drop=True)
-#Удаляем строки без Kq и вставляем нули в пустые ячейки¶
-df.dropna(subset = ['Kq'], inplace = True)
-df.loc[:,['height_h', 'gap_D', 'gap_u','thickness_d', 'thickness_s', 'angle', 'angle/90', 'h/lo', 'D/lo',
-          'd/lo', 'u/lo', 's/lo']] = df.loc[:,['height_h', 'gap_D', 'gap_u','thickness_d', 'thickness_s', 
-                                               'angle', 'angle/90', 'h/lo', 'D/lo','d/lo', 'u/lo', 's/lo']].fillna(0)
-#удаление гладких                                               
-df = df.loc[df['h/lo'] != 0]
-df = df.reset_index(drop=True)
+@st.cache
+def read_data():
+    return pd.read_csv('datatermoRedact.csv')
+
+df=read_data()
 
 X = df[['Kq','angle/90', 'h/lo', 'D/lo', 'd/lo', 'u/lo', 's/lo', 'Pr']]
 y = df['a/a_smooth_Bor']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
-rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
+@st.cache
+def RndForst():
+         rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
 
-rndm.fit(X_train, y_train)
-rndm_y_pred = rndm.predict(X)
-firstY=df['a/a_smooth_Bor']
-firstY=firstY.values
-endYYY=rndm_y_pred/firstY
+         rndm.fit(X_train, y_train)
+         rndm_y_pred = rndm.predict(X)
+         firstY=df['a/a_smooth_Bor']
+         firstY=firstY.values
+         endYYY=rndm_y_pred/firstY
 
-endYYY=pd.DataFrame(data=endYYY)
-endYYY=endYYY.loc[:,0]
+         endYYY=pd.DataFrame(data=endYYY)
+         endYYY=endYYY.loc[:,0]
+         return endYYY
+
 
 plt.scatter(df['q'], endYYY, edgecolor='b')
 plt.ylim([0.1, 10])

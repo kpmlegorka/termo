@@ -23,13 +23,13 @@ X = df[['Kq','angle/90', 'h/lo', 'D/lo', 'd/lo', 'u/lo', 's/lo']]
 y = df['a/a_smooth_Bor']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
-col1, col2= st.beta_columns(2)
-    with col1:
-        rndFors=st.checkbox("RandomForest", False)
-    with col2:
-        linReg=st.checkbox("RandomForest", False)
-#    with col3:
-#        nerKa=st.checkbox("RandomForest", False)
+colum1, colum2= st.beta_columns(2)
+with colum1:
+    rndFors=st.checkbox("RandomForest", False)
+with colum2:
+    linReg=st.checkbox("RandomForest", False)
+#with col3:
+#   nerKa=st.checkbox("RandomForest", False)
 data_slider = {'Kq': [x1], 'угол/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'u/lo': [x6], 's/lo': [x7]}
 nm = pd.DataFrame(data=data_slider)
 

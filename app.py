@@ -36,25 +36,25 @@ with colum2:
 genre = st.radio("Выберите вид структуры 3D или 2D",('3D', '2D'))
 if genre == '3D':
 #Kq
-    x1 = st.sidebar.slider('Kq', min_value=2, max_value=12000)
+    x1 = st.sidebar.slider('Kq', min_value=2, max_value=12000,  value=1190)
 
 #угол/90
-    x2 = st.sidebar.slider('угол/90', min_value=0.78, max_value=1.00)
+    x2 = st.sidebar.slider('угол/90', min_value=0.78, max_value=1.00,  value=0.89)
 
 #h/lo
-    x3 = st.sidebar.slider('h/lo', min_value=0.01, max_value=1.00)
+    x3 = st.sidebar.slider('h/lo', min_value=0.01, max_value=1.00,  value=0.23)
 
 #D/lo
-    x4 = st.sidebar.slider('D/lo', min_value=0.01, max_value=1.00)
+    x4 = st.sidebar.slider('D/lo', min_value=0.01, max_value=1.00,  value=0.08)
 
 #d/lo
-    x5 = st.sidebar.slider('d/lo', min_value=0.01, max_value=1.00)
+    x5 = st.sidebar.slider('d/lo', min_value=0.01, max_value=1.00,  value=0.06)
 
 #u/lo
-    x6 = st.sidebar.slider('u/lo', min_value=0.01, max_value=1.00)
+    x6 = st.sidebar.slider('u/lo', min_value=0.01, max_value=1.00,  value=0.07)
 
 #s/lo
-    x7 = st.sidebar.slider('s/lo', min_value=0.01, max_value=1.00)
+    x7 = st.sidebar.slider('s/lo', min_value=0.01, max_value=1.00,  value=0.06)
 
     y=1.49*x1**(-0.15)*x2**(-1.720)*x3**(0.313)*x4**(0.069)*x5**(0.078)*x6**(-0.454)*x7**(-0.492)   
     data_slider = {'Kq': [x1], 'угол/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'u/lo': [x6], 's/lo': [x7]}

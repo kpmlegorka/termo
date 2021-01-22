@@ -71,12 +71,12 @@ if genre == '3D':
             rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
             rndm.fit(X_train, y_train)
             y_forest=rndm.predict(nm)
-            st.write('Лес: α/α0=',y_forest[0])
+            st.write('Лес: α/α0=',round(y_forest[0], 2))
         if linReg:
             lm = LinearRegression()
             model = lm.fit(X_train, y_train)
             y_linReg = lm.predict(nm)
-            st.write('Линейная регрессия: α/α0=',y_linReg[0])
+            st.write('ЛинРегрессия: α/α0=',round(y_linReg[0], 2))
   #      if nerKa:
             
            

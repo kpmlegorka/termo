@@ -27,7 +27,7 @@ colum1, colum2= st.beta_columns(2)
 with colum1:
     rndFors=st.checkbox("RandomForest", False)
 with colum2:
-    linReg=st.checkbox("RandomForest", False)
+    linReg=st.checkbox("LinearRegression", False)
 #with col3:
 #   nerKa=st.checkbox("RandomForest", False)
 data_slider = {'Kq': [x1], 'угол/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'u/lo': [x6], 's/lo': [x7]}

@@ -45,10 +45,10 @@ if genre == '3D':
     x3 = st.sidebar.slider('h/lo', min_value=0.01, max_value=1.00,  value=0.23)
 
 #D/lo
-    x4 = st.sidebar.slider('D/lo', min_value=0.01, max_value=1.00,  value=0.08)
+    x4 = st.sidebar.slider('Δ/lo', min_value=0.01, max_value=1.00,  value=0.08)
 
 #d/lo
-    x5 = st.sidebar.slider('d/lo', min_value=0.01, max_value=1.00,  value=0.06)
+    x5 = st.sidebar.slider('δ/lo', min_value=0.01, max_value=1.00,  value=0.06)
 
 #u/lo
     x6 = st.sidebar.slider('u/lo', min_value=0.01, max_value=1.00,  value=0.07)
@@ -65,7 +65,7 @@ if genre == '3D':
         st.image('3d.jpg',  use_column_width=True)
     with col2:
         st.header("Значение теплоотдачи")  
-        st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','D/lo=', x4,'; ','d/lo=', x5,'; ','u/lo=', x6,'; ','s/lo=', x7)
+        st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5,'; ','u/lo=', x6,'; ','s/lo=', x7)
         st.write('Формула: α/α0=',round(y, 2))
         if rndFors:
             rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
@@ -91,10 +91,10 @@ else:
     x3 = st.sidebar.slider('h/lo', min_value=0.01, max_value=1.00)
 
 #D/lo
-    x4 = st.sidebar.slider('D/lo', min_value=0.01, max_value=1.00)
+    x4 = st.sidebar.slider('Δ/lo', min_value=0.01, max_value=1.00)
 
 #d/lo
-    x5 = st.sidebar.slider('d/lo', min_value=0.01, max_value=1.00)
+    x5 = st.sidebar.slider('δ/lo', min_value=0.01, max_value=1.00)
 
 
     y=6*x1**(-0.2)*x2**(0.554)*x3**(0.19)*x4**(0.201)*x5**(-0.394)
@@ -105,5 +105,5 @@ else:
         st.image('2d.jpg',  use_column_width=True)
     with col2:
         st.header("Значение теплоотдачи")
-        st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','D/lo=', x4,'; ','d/lo=', x5)
+        st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5)
         st.write('α/α0=',y)

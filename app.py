@@ -66,7 +66,7 @@ if genre == '3D':
     with col2:
         st.header("Значение теплоотдачи")  
         st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','D/lo=', x4,'; ','d/lo=', x5,'; ','u/lo=', x6,'; ','s/lo=', x7)
-        st.write('Формула: α/α0=',round(y[0], 2))
+        st.write('Формула: α/α0=',round(y, 2))
         if rndFors:
             rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
             rndm.fit(X_train, y_train)

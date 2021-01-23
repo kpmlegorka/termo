@@ -69,6 +69,7 @@ if genre == '3D':
     y=1.49*x1**(-0.15)*x2**(-1.720)*x3**(0.313)*x4**(0.069)*x5**(0.078)*x6**(-0.454)*x7**(-0.492)   
     data_slider = {'Kq': [x1], 'угол/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'u/lo': [x6], 's/lo': [x7]}
     nm = pd.DataFrame(data=data_slider)
+    xnm=np.array([[x1], [x2], [x3], [x4], [x5], [x6], [x7]])
     col1, col2= st.beta_columns(2)
     with col1:
         st.header("3D структура")
@@ -93,7 +94,7 @@ if genre == '3D':
             y_np = dataset[:,7]
             Xmodel = xgboost.XGBRegressor()
             Xmodel.fit(X_np, y_np)
-            y_nerKa = Xmodel.predict(nm)
+            y_nerKa = Xmodel.predict(xnm)
             st.write('Градиент: α/α0=',round(y_nerKa[0], 2))
 else:
 #Kq

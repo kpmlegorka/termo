@@ -1,12 +1,16 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
 from sklearn.preprocessing import PolynomialFeatures
+
+import xgboost
+from sklearn import model_selection    #cross_validation
+
 
 '''
 # Подбор геометрических параметров микроструктуры
@@ -23,13 +27,13 @@ X = df[['Kq','angle/90', 'h/lo', 'D/lo', 'd/lo', 'u/lo', 's/lo']]
 y = df['a/a_smooth_Bor']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
-colum1, colum2= st.beta_columns(2)
+colum1, colum2, colum3= st.beta_columns(3)
 with colum1:
     rndFors=st.checkbox("RandomForest", False)
 with colum2:
     linReg=st.checkbox("LinearRegression", False)
-#with col3:
-#   nerKa=st.checkbox("RandomForest", False)
+with colum3:
+    nerKa=st.checkbox("XGBoost", False)
 
 
 
@@ -77,9 +81,11 @@ if genre == '3D':
             model = lm.fit(X_train, y_train)
             y_linReg = lm.predict(nm)
             st.write('ЛинРегрессия: α/α0=',round(y_linReg[0], 2))
-  #      if nerKa:
-            
-           
+        if nerKa:
+            Xmodel = xgboost.XGBRegressor()
+            Xmodel.fit(X_train, y_train)
+            y_nerKa = Xmodel.predict(nm)
+            st.write('Градиент: α/α0=',round(y_nerKa[0], 2))
 else:
 #Kq
     x1 = st.sidebar.slider('Kq', min_value=2, max_value=12000)

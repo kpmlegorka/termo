@@ -20,8 +20,14 @@ from sklearn import model_selection    #cross_validation
 @st.cache
 def read_data():
     return pd.read_csv('datatermoRedact.csv')
-
 df=read_data()
+
+@st.cache
+def read_data2():
+    xd=pd.read_csv('only_XandY.csv')
+    xd.drop(['Unnamed: 0'], axis='columns', inplace=True)
+    return xd
+xdd=read_data2()
 
 X = df[['Kq','angle/90', 'h/lo', 'D/lo', 'd/lo', 'u/lo', 's/lo']]
 y = df['a/a_smooth_Bor']
@@ -82,7 +88,7 @@ if genre == '3D':
             y_linReg = lm.predict(nm)
             st.write('ЛинРегрессия: α/α0=',round(y_linReg[0], 2))
         if nerKa:
-            dataset=df.to_numpy()      
+            dataset=xdd.to_numpy()      
             X_np = dataset[:,0:7]
             y_np = dataset[:,7]
             Xmodel = xgboost.XGBRegressor()

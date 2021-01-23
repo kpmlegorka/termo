@@ -82,8 +82,11 @@ if genre == '3D':
             y_linReg = lm.predict(nm)
             st.write('ЛинРегрессия: α/α0=',round(y_linReg[0], 2))
         if nerKa:
+            dataset=df.to_numpy()      
+            X_np = dataset[:,0:7]
+            y_np = dataset[:,7]
             Xmodel = xgboost.XGBRegressor()
-            Xmodel.fit(X_train, y_train)
+            Xmodel.fit(X_np, y_np)
             y_nerKa = Xmodel.predict(nm)
             st.write('Градиент: α/α0=',round(y_nerKa[0], 2))
 else:

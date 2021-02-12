@@ -114,7 +114,9 @@ else:
 
 
     y=6*x1**(-0.2)*x2**(0.554)*x3**(0.19)*x4**(0.201)*x5**(-0.394)
-
+    data_slider = {'Kq': [x1], 'угол/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5]}
+    nm = pd.DataFrame(data=data_slider)
+    xnm=np.array([[x1, x2, x3, x4, x5]])
     col1, col2= st.beta_columns(2)
     with col1:
         st.header("2D структура")
@@ -122,4 +124,22 @@ else:
     with col2:
         st.header("Значение теплоотдачи")
         st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5)
-        st.write('α/α0=',y)
+        st.write('Формула: α/α0=',round(y, 2))
+        if rndFors:
+            rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
+            rndm.fit(X_train, y_train)
+            y_forest=rndm.predict(nm)
+            st.write('Лес: α/α0=',round(y_forest[0], 2))
+        if linReg:
+            lm = LinearRegression()
+            model = lm.fit(X_train, y_train)
+            y_linReg = lm.predict(nm)
+            st.write('ЛинРегрессия: α/α0=',round(y_linReg[0], 2))
+        if nerKa:
+            dataset=xdd.to_numpy()      
+            X_np = dataset[:,0:7]
+            y_np = dataset[:,7]
+            Xmodel = xgboost.XGBRegressor()
+            Xmodel.fit(X_np, y_np)
+            y_nerKa = Xmodel.predict(xnm)
+            st.write('Градиент: α/α0=',round(y_nerKa[0], 2))

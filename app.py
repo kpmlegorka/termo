@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
+#from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
 from sklearn.preprocessing import PolynomialFeatures
@@ -23,15 +23,24 @@ def read_data():
 df=read_data()
 
 @st.cache
+def read_dataU():
+    return pd.read_csv('datatermoRedact2.csv')
+Uf=read_dataU()
+
+@st.cache
 def read_data2():
     xd=pd.read_csv('only_XandY.csv')
     xd.drop(['Unnamed: 0'], axis='columns', inplace=True)
     return xd
 xdd=read_data2()
 
-X = df[['Kq','angle/90', 'h/lo', 'D/lo', 'd/lo', 'u/lo', 's/lo']]
-y = df['a/a_smooth_Bor']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+XU_train = Uf[['Kq','angle/90', 'h/lo', 'D/lo', 'd/lo']]
+yU_train = Uf['a/a_smooth_Bor']
+#XU_train, XU_test, yU_train, yU_test = train_test_split(XU, yU, test_size=0.3, random_state=0)
+
+X_train = df[['Kq','angle/90', 'h/lo', 'D/lo', 'd/lo', 'u/lo', 's/lo']]
+y_train = df['a/a_smooth_Bor']
+#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
 colum1, colum2, colum3= st.beta_columns(3)
 with colum1:
@@ -127,12 +136,12 @@ else:
         st.write('Формула: α/α0=',round(y, 2))
         if rndFors:
             rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
-            rndm.fit(X_train, y_train)
+            rndm.fit(XU_train, yU_train)
             y_forest=rndm.predict(nm)
             st.write('Лес: α/α0=',round(y_forest[0], 2))
         if linReg:
             lm = LinearRegression()
-            model = lm.fit(X_train, y_train)
+            model = lm.fit(XU_train, yU_train)
             y_linReg = lm.predict(nm)
             st.write('ЛинРегрессия: α/α0=',round(y_linReg[0], 2))
         if nerKa:

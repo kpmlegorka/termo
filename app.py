@@ -122,7 +122,8 @@ else:
     x5 = st.sidebar.slider('δ/lo', min_value=0.01, max_value=1.00,  value=0.22)
 
 
-    y=6*x1**(-0.2)*x2**(0.554)*x3**(0.19)*x4**(0.201)*x5**(-0.394)
+    y=2.66*x1**(-0.09)*x2**(-0.091)*x3**(0.133)*x4**(0.035)*x5**(-0.149)
+    
     data_slider = {'Kq': [x1], 'угол/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5]}
     nm = pd.DataFrame(data=data_slider)
     xnm=np.array([[x1, x2, x3, x4, x5]])

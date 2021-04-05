@@ -31,8 +31,8 @@ if genre == '3D':
 #Kq
     x1 = st.sidebar.slider('Kq', min_value=8, max_value=12000,  value=1190)
 
-#угол/90
-    x2 = st.sidebar.slider('угол/90', min_value=0.78, max_value=1.00,  value=0.89)
+#angle/90
+    x2 = st.sidebar.slider('angle/90', min_value=0.78, max_value=1.00,  value=0.89)
 
 #h/lo
     x3 = st.sidebar.slider('h/lo', min_value=0.09, max_value=0.71,  value=0.23)
@@ -52,7 +52,7 @@ if genre == '3D':
     x8 = st.sidebar.slider('Pr', min_value=1.7, max_value=6.8,  value=1.75)
 
     y=1.49*x1**(-0.15)*x2**(-1.720)*x3**(0.313)*x4**(0.069)*x5**(0.078)*x6**(-0.454)*x7**(-0.492)   
-    data_slider = {'Kq': [x1], 'угол/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'u/lo': [x6], 's/lo': [x7], 'Pr': [x8]}
+    data_slider = {'Kq': [x1], 'angle/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'u/lo': [x6], 's/lo': [x7], 'Pr': [x8]}
     nm = pd.DataFrame(data=data_slider)
     
     col1, col2= st.beta_columns(2)
@@ -61,7 +61,7 @@ if genre == '3D':
         st.image('3d.jpg',  use_column_width=True)
     with col2:
         st.header("Значение теплоотдачи")  
-        st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5,'; ','u/lo=', x6,'; ','s/lo=', x7, '; ','Pr', x8)
+        st.write('Kq=', x1,'; ','angle/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5,'; ','u/lo=', x6,'; ','s/lo=', x7, '; ','Pr', x8)
         st.write('Формула: α/α0=',round(y, 2))
         if rndFors:
             #rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')

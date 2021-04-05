@@ -60,19 +60,19 @@ if genre == '3D':
         st.header("3D структура")
         st.image('3d.jpg',  use_column_width=True)
     with col2:
-        st.header("Значение теплоотдачи")  
+        st.header("Значение интесификации теплоотдачи")  
         st.write('Kq=', x1,'; ','angle/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5,'; ','u/lo=', x6,'; ','s/lo=', x7, '; ','Pr', x8)
-        st.write('Формула: α/α0=',round(y, 2))
+        st.write('Полиноминальная регрессия: α/α0=',round(y, 2))
         if rndFors:
             #rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
             #rndm.fit(X_train, y_train)
             y_forest=rndm.predict(nm)
-            st.write('Лес: α/α0=',round(y_forest[0], 2))
+            st.write('RandomForest: α/α0=',round(y_forest[0], 2))
         if linReg:
             #lm = LinearRegression()
             #model = lm.fit(X_train, y_train)
             y_linReg = lm.predict(nm)
-            st.write('ЛинРегрессия: α/α0=',round(y_linReg[0], 2))
+            st.write('GBRegressor: α/α0=',round(y_linReg[0], 2))
         if nerKa:
             #dataset=xdd.to_numpy()      
             #X_np = dataset[:,0:7]
@@ -80,7 +80,7 @@ if genre == '3D':
             #Xmodel = xgboost.XGBRegressor()
             #Xmodel.fit(X_np, y_np)
             y_nerKa = Xmodel.predict(nm)  #(xnm)
-            st.write('Градиент: α/α0=',round(y_nerKa[0], 2))
+            st.write('XGBoost: α/α0=',round(y_nerKa[0], 2))
 else:
 #Kq
     x1 = st.sidebar.slider('Kq', min_value=13, max_value=13660,  value=203)

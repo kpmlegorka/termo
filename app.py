@@ -1,33 +1,18 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
-#from sklearn.linear_model import LinearRegression
-#from sklearn.model_selection import train_test_split
-#from sklearn.ensemble import RandomForestRegressor
-#from sklearn.metrics import r2_score
-#from sklearn.preprocessing import PolynomialFeatures
 import joblib
-#import xgboost
-#from sklearn import model_selection    #cross_validation
+
 
 
 '''
 # Подбор геометрических параметров микроструктуры
 #### Чтобы прогнозировать теплоотдачу с помощью "нейросетей", используйте переключатели ниже _(замедляют быстродействие)_
 '''
-@st.cache
-def rndmF_load_model():
-    return rndmF_model_joblib = joblib.load('rndmF_model.pkl')
-rndm=rndmF_load_model()
-@st.cache
-def XGBR_load_model():
-    return XGBR_model_joblib = joblib.load('XGBR_model.pkl')
-Xmodel=XGBR_load_model()
-@st.cache
-def GBR__load_model():
-    return GBR__model_joblib = joblib.load('XGBR_model.pkl')
-lm=GBR_load_model()
+
+rndm = joblib.load('rndmF_model.pkl')
+Xmodel=joblib.load('XGBR_model.pkl')
+lm=joblib.load('XGBR_model.pkl')
 
 
 
@@ -35,7 +20,7 @@ colum1, colum2, colum3= st.beta_columns(3)
 with colum1:
     rndFors=st.checkbox("RandomForest", False)
 with colum2:
-    linReg=st.checkbox("LinearRegression", False)
+    linReg=st.checkbox("GBRegressor", False)
 with colum3:
     nerKa=st.checkbox("XGBoost", False)
 
@@ -63,18 +48,20 @@ if genre == '3D':
 
 #s/lo
     x7 = st.sidebar.slider('s/lo', min_value=0.01, max_value=0.79,  value=0.06)
+#Pr
+    x8 = st.sidebar.slider('Pr', min_value=1.7, max_value=6.8,  value=1.75)
 
     y=1.49*x1**(-0.15)*x2**(-1.720)*x3**(0.313)*x4**(0.069)*x5**(0.078)*x6**(-0.454)*x7**(-0.492)   
-    data_slider = {'Kq': [x1], 'угол/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'u/lo': [x6], 's/lo': [x7]}
+    data_slider = {'Kq': [x1], 'угол/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'u/lo': [x6], 's/lo': [x7], 'Pr': [x8]}
     nm = pd.DataFrame(data=data_slider)
-    #xnm=np.array([[x1, x2, x3, x4, x5, x6, x7]])
+    
     col1, col2= st.beta_columns(2)
     with col1:
         st.header("3D структура")
         st.image('3d.jpg',  use_column_width=True)
     with col2:
         st.header("Значение теплоотдачи")  
-        st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5,'; ','u/lo=', x6,'; ','s/lo=', x7)
+        st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5,'; ','u/lo=', x6,'; ','s/lo=', x7, '; ','Pr', x8)
         st.write('Формула: α/α0=',round(y, 2))
         if rndFors:
             #rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')

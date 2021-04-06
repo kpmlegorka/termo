@@ -12,7 +12,7 @@ import joblib
 
 rndm = joblib.load('rndmF_model.pkl')
 Xmodel=joblib.load('XGBR_model.pkl')
-lm=joblib.load('XGBR_model.pkl')
+lm=joblib.load('GBR_model.pkl')
 
 
 

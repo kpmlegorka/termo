@@ -7,7 +7,7 @@ import joblib
 
 '''
 # Подбор геометрических параметров микроструктуры
-#### Чтобы прогнозировать теплоотдачу с помощью "нейросетей", используйте переключатели ниже _(замедляют быстродействие)_
+#### Чтобы прогнозировать теплоотдачу с помощью "нейросетей", используйте переключатели ниже:
 '''
 
 rndm = joblib.load('rndmF_model.pkl')
@@ -114,17 +114,17 @@ else:
     with col2:
         st.header("Значение теплоотдачи")
         st.write('Kq=', x1,'; ','angle/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5,'; ','Pr=', x6)
-        st.write('Формула: α/α0=',round(y, 2))
+        st.write('Полиноминальная регрессия: α/α0=',round(y, 2))
         if rndFors:
             #rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')
             #rndm.fit(XU_train, yU_train)
             y_forest=rndm2.predict(nm)
-            st.write('Лес: α/α0=',round(y_forest[0], 2))
+            st.write('RandomForest: α/α0=',round(y_forest[0], 2))
         if linReg:
             #lm = LinearRegression()
             #model = lm.fit(XU_train, yU_train)
             y_linReg = lm2.predict(nm)
-            st.write('ЛинРегрессия: α/α0=',round(y_linReg[0], 2))
+            st.write('GBRegressor: α/α0=',round(y_linReg[0], 2))
         if nerKa:
             #dataset=xdd.to_numpy()      
             #X_np = dataset[:,0:7]
@@ -132,4 +132,4 @@ else:
             #Xmodel = xgboost.XGBRegressor()
             #Xmodel.fit(X_np, y_np)
             y_nerKa = Xmodel2.predict(nm)
-            st.write('Градиент: α/α0=',round(y_nerKa[0], 2))
+            st.write('XGBoost: α/α0=',round(y_nerKa[0], 2))

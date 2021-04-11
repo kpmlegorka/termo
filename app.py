@@ -89,7 +89,7 @@ else:
     x1 = st.sidebar.slider('Kq', min_value=13, max_value=13660,  value=203)
 
 #угол/90
-    x2 = st.sidebar.slider('угол/90', min_value=0.72, max_value=1.00,  value=1.00)
+    x2 = st.sidebar.slider('angle/90', min_value=0.72, max_value=1.00,  value=1.00)
 
 #h/lo
     x3 = st.sidebar.slider('h/lo', min_value=0.03, max_value=1.45,  value=1.45)
@@ -104,7 +104,7 @@ else:
 
     y=2.66*x1**(-0.09)*x2**(-0.091)*x3**(0.133)*x4**(0.035)*x5**(-0.149)
     
-    data_slider = {'Kq': [x1], 'угол/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'Pr': [x6]}
+    data_slider = {'Kq': [x1], 'angle/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'Pr': [x6]}
     nm = pd.DataFrame(data=data_slider)
     xnm=np.array([[x1, x2, x3, x4, x5]])
     col1, col2= st.beta_columns(2)
@@ -113,7 +113,7 @@ else:
         st.image('2d.jpg',  use_column_width=True)
     with col2:
         st.header("Значение теплоотдачи")
-        st.write('Kq=', x1,'; ','угол/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5,'; ','Pr=', x6)
+        st.write('Kq=', x1,'; ','angle/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5,'; ','Pr=', x6)
         st.write('Формула: α/α0=',round(y, 2))
         if rndFors:
             #rndm=RandomForestRegressor(n_estimators=100, max_features ='sqrt')

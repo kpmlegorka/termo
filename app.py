@@ -106,7 +106,7 @@ else:
     
     data_slider = {'Kq': [x1], 'angle/90': [x2], 'h/lo': [x3], 'D/lo': [x4], 'd/lo': [x5], 'Pr': [x6]}
     nm = pd.DataFrame(data=data_slider)
-    xnm=np.array([[x1, x2, x3, x4, x5]])
+    #xnm=np.array([[x1, x2, x3, x4, x5]])
     col1, col2= st.beta_columns(2)
     with col1:
         st.header("2D структура")
@@ -131,5 +131,5 @@ else:
             #y_np = dataset[:,7]
             #Xmodel = xgboost.XGBRegressor()
             #Xmodel.fit(X_np, y_np)
-            y_nerKa = Xmodel2.predict(xnm)
+            y_nerKa = Xmodel2.predict(nm)
             st.write('Градиент: α/α0=',round(y_nerKa[0], 2))

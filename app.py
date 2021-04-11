@@ -112,7 +112,7 @@ else:
         st.header("2D структура")
         st.image('2d.jpg',  use_column_width=True)
     with col2:
-        st.header("Значение теплоотдачи")
+        st.header("Значение интенсификации теплоотдачи")
         st.write('Kq=', x1,'; ','angle/90=', x2,'; ','h/lo=', x3,'; ','Δ/lo=', x4,'; ','δ/lo=', x5,'; ','Pr=', x6)
         st.write('Полиноминальная регрессия: α/α0=',round(y, 2))
         if rndFors:
